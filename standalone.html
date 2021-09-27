@@ -4,10 +4,11 @@
 		<script type="text/javascript" src="https://unpkg.com/vtk.js"></script>
 	</head>
 	<body>
-		<div id="container"></div>
+		<div id="container" style="height: 500px; width: 500px; "></div>
 		<script type="text/javascript">
 
 			const container = document.querySelector('#container');
+			const dims = container.getBoundingClientRect();
 
 			// VTK renderWindow/renderer
 			const renderWindow = vtk.Rendering.Core.vtkRenderWindow.newInstance();
@@ -17,7 +18,7 @@
 			// WebGL/OpenGL impl
 			const openGLRenderWindow = vtk.Rendering.OpenGL.vtkRenderWindow.newInstance();
 			openGLRenderWindow.setContainer(container);
-			openGLRenderWindow.setSize(1000, 1000);
+			openGLRenderWindow.setSize(dims.width, dims.height);
 			renderWindow.addView(openGLRenderWindow);
 
 			// Interactor
@@ -41,9 +42,8 @@
 
 			// Render
 			renderer.resetCamera();
-			renderWindow.render(); 
+			renderWindow.render();
 
 		</script>
 	</body>
 </html>
-
